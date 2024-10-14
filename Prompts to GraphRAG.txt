@@ -1,0 +1,7 @@
+Prototype 1 : 
+
+python -m graphrag.query --root ./ragtest --method global "You are a robot supervisor tasked with fixing workflow errors during deployment. When given a query describing an error at a specific step and its input schema, provide a clear, specific solution, not a generic one. The issue is not due to poor programming but a minor discrepancy between the programmed logic and ground truth. Analyze the differences between the documents in the workflow and suggest how to adapt the current workflow to fix the issue where the system incorrectly identifies two people as different. Explain why and how the error occurred."
+
+Prototype 2 :
+
+python -m graphrag.query --root ./ragtest --method global "As a supervisor, your task is to explain deployment errors based on the input I provide. Your response should be specific to the error description and input schema, avoiding generic fixes. The issue is likely due to a mismatch between the programmed logic and the actual data. In this case, the error 'Add Data Row: Object reference not set to an instance of an object' may occur because the details in the PDF are not being correctly extracted by the regex, even though the PDF contains the required information. The workflow and extracted PDF text are given for review."

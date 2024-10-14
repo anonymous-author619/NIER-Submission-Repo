@@ -1,0 +1,143 @@
+{
+    "1.1 Main Sequence (Sequence)": [
+        "Private = False",
+        {
+            "Variables": [
+                "aadhaar(String)",
+                "license(String)",
+                "matchedAadhaarName(IEnumerable<Match>)",
+                "matchedAadhaarDOB(IEnumerable<Match>)",
+                "matchedAadhaarAddress(IEnumerable<Match>)",
+                "matchedLicenseName(IEnumerable<Match>)",
+                "matchedLicenseDOB(IEnumerable<Match>)",
+                "matchedLicenseAddress(IEnumerable<Match>)"
+            ]
+        },
+        {
+            "Activities": [
+                {
+                    "1.234 Read PDF Text (ReadPDFText)": [
+                        "FileName = D:\\RPA Paper\\Shreya's Aadhaar card.pdf",
+                        "Range = All",
+                        "Text = aadhaar",
+                        "Private = False"
+                    ]
+                },
+                {
+                    "1.214 Find Matching Patterns (Matches)": [
+                        "Pattern = Date((.*)\\n)*B,",
+                        "Text to search in = aadhaar",
+                        "Pattern options = IgnoreCase, Compiled",
+                        "Result = matchedAadhaarName",
+                        "ResultType = System.Collections.Generic.IEnumerable`1[System.Text.RegularExpressions.Match]",
+                        "Private = False"
+                    ]
+                },
+                {
+                    "1.183 Find Matching Patterns (Matches)": [
+                        "Pattern = DOB; (.*)",
+                        "Text to search in = aadhaar",
+                        "Pattern options = IgnoreCase, Compiled",
+                        "Result = matchedAadhaarDOB",
+                        "ResultType = System.Collections.Generic.IEnumerable`1[System.Text.RegularExpressions.Match]",
+                        "Private = False"
+                    ]
+                },
+                {
+                    "1.152 Find Matching Patterns (Matches)": [
+                        "Pattern = Address: ((.*\\n)*\\d{6})",
+                        "Text to search in = aadhaar",
+                        "Pattern options = IgnoreCase, Multiline, Compiled",
+                        "Result = matchedAadhaarAddress",
+                        "ResultType = System.Collections.Generic.IEnumerable`1[System.Text.RegularExpressions.Match]",
+                        "Private = False"
+                    ]
+                },
+                {
+                    "1.129 Read PDF Text (ReadPDFText)": [
+                        "FileName = D:\\RPA Paper\\Shreya's Driving License.pdf",
+                        "Range = All",
+                        "Text = license",
+                        "Private = False"
+                    ]
+                },
+                {
+                    "1.109 Find Matching Patterns (Matches)": [
+                        "Pattern = Name : (.*)",
+                        "Text to search in = license",
+                        "Pattern options = IgnoreCase, Compiled",
+                        "Result = matchedLicenseName",
+                        "ResultType = System.Collections.Generic.IEnumerable`1[System.Text.RegularExpressions.Match]",
+                        "Private = False"
+                    ]
+                },
+                {
+                    "1.78 Find Matching Patterns (Matches)": [
+                        "Pattern = DOB :  (.*)",
+                        "Text to search in = license",
+                        "Pattern options = IgnoreCase, Compiled",
+                        "Result = matchedLicenseDOB",
+                        "ResultType = System.Collections.Generic.IEnumerable`1[System.Text.RegularExpressions.Match]",
+                        "Private = False"
+                    ]
+                },
+                {
+                    "1.47 Find Matching Patterns (Matches)": [
+                        "Pattern = Permanent Address:(((.*)\\n)*\\d{6})",
+                        "Text to search in = license",
+                        "Pattern options = IgnoreCase, Compiled",
+                        "Result = matchedLicenseAddress",
+                        "ResultType = System.Collections.Generic.IEnumerable`1[System.Text.RegularExpressions.Match]",
+                        "Private = False"
+                    ]
+                },
+                {
+                    "1.2 If (If)": [
+                        "Condition = (matchedAadhaarName(0).groups(1).value = matchedLicenseName(0).groups(1).value) and (matchedAadhaarDOB(0).groups(1).value = matchedLicenseDOB(0).groups(1).value) and (matchedAadhaarAddress(0).groups(1).value = matchedLicenseAddress(0).groups(1).value)",
+                        "Private = False",
+                        {
+                            "1.24 Then": [
+                                {
+                                    "1.24 Then (Sequence)": [
+                                        "Private = False",
+                                        {
+                                            "Activities": [
+                                                {
+                                                    "1.25 Message Box (MessageBox)": [
+                                                        "Content = \"Both the people are same\"",
+                                                        "AutomaticallyCloseAfter = 00:00:00",
+                                                        "Private = False"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "1.12 Else": [
+                                {
+                                    "1.12 Else (Sequence)": [
+                                        "Private = False",
+                                        {
+                                            "Activities": [
+                                                {
+                                                    "1.13 Message Box (MessageBox)": [
+                                                        "Content = \"Both the people are different\"",
+                                                        "AutomaticallyCloseAfter = 00:00:00",
+                                                        "Private = False"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
